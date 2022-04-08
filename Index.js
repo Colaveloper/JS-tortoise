@@ -6,6 +6,9 @@ var n = 0; // the contestants run in steps, counted by this variable
 var startSignal = document.getElementById('startSignal');
 var result = document.getElementById('result');
 
+var Abar = document.getElementById('achillesBar');
+var Tbar = document.getElementById('tortoiseBar');
+
 startSignal.onclick = function () {
   startSignal.parentNode.removeChild(startSignal); // (removing the button)
   var step = setInterval(function () {
@@ -13,12 +16,15 @@ startSignal.onclick = function () {
     T = (L + T) / 2; // which in the meantime went halfway from the end
     n++;
 
-    result.innerHTML = `We're at step number: ${n} <br> Their distance from each other is: ${
+    Abar.style.setProperty('width', `${A * 100}%`);
+    Tbar.style.setProperty('width', `${T * 100}%`);
+
+    result.innerHTML = `We're at step number: ${n} <br> The distance from each other is: ${
       T - A
     }`;
 
     if (A == T) {
-      result.innerHTML = `The contestants met at ${A} after ${n} steps! <br>
+      result.innerHTML = `The contestants met after ${n} steps! <br>
     I'm sorry Zeno, I see no paradox here 🙃`;
       clearInterval(step);
     }
